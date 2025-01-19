@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/HomePage.css';
-import promoImage from '../assets/images/homepagelogo.jpg.jpg';
+import promoImage from '../assets/images/logo.jpg';
 
 const categories = [
   { name: 'Gadgets', image: 'https://th.bing.com/th?id=OIP.Y-nPHJk5yGzEqgpoQFpbKwHaE8&w=305&h=204&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2' },

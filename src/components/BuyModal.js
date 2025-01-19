@@ -1,16 +1,30 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/BuyModal.css';
 
 const BuyModal = ({ product, onClose }) => {
   const [quantity, setQuantity] = useState(1);
+  const navigate = useNavigate();
 
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
   };
 
   const handleBuy = () => {
-    const totalPrice = (parseFloat(product.price.replace('$', '')) * quantity).toFixed(2);
-    alert(`You have purchased ${quantity} ${product.name}(s) for $${totalPrice}`);
+    const order = {
+      id: Date.now(),
+      date: new Date().toLocaleDateString(),
+      total: `$${(parseFloat(product.price.replace('$', '')) * quantity).toFixed(2)}`,
+      items: [product.name],
+      quantity: quantity,
+      image: product.image,
+    };
+
+    // Save order to local storage
+    const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
+    localStorage.setItem('orders', JSON.stringify([...existingOrders, order]));
+
+    navigate('/order', { state: { product, quantity } });
     onClose();
   };
 

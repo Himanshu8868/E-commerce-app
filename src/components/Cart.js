@@ -4,12 +4,17 @@ import '../styles/Cart.css';
 
 const Cart = () => {
   const { cartItems, removeFromCart } = useContext(CartContext);
-
+     
+  const stylecart = {
+    color:'black'
+  }
+ 
   return (
+    <div>
     <div className="cart-container">
-      <h2>Your Cart</h2>
+      <h2 style={stylecart}> Your Cart</h2>
       {cartItems.length === 0 ? (
-        <div className="item-remove"><p>Your cart is empty.</p></div>
+        <div className="item-remove"><h1>Your cart is empty.</h1></div>
       ) : (
         <ul className="cart-items">
           {cartItems.map((item, index) => (
@@ -24,6 +29,7 @@ const Cart = () => {
           ))}
         </ul>
       )}
+    </div>
     </div>
   );
 };

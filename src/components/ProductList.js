@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import ProductItem from './ProductItem';
 import BuyModal from './BuyModal';
 import { CartContext } from '../context/CartContext';
@@ -10,6 +11,13 @@ const ProductList = () => {
   const [showBuyModal, setShowBuyModal] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const { addToCart } = useContext(CartContext);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const searchQuery = searchParams.get('search') || '';
+
+  const filteredItems = items.filter(item =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const handleViewDetails = (product) => {
     setSelectedProduct(product);
@@ -34,7 +42,7 @@ const ProductList = () => {
     setShowSuccessMessage(true);
     setTimeout(() => {
       setShowSuccessMessage(false);
-    }, 2000); // Show message for 2 seconds
+    }, 1000); // Show message for 2 seconds
   };
 
   // Close modal with Escape key
@@ -53,7 +61,7 @@ const ProductList = () => {
     <div className="product-list-container">
       <h2>Product List</h2>
       <div className="product-grid">
-        {items.map((product) => (
+        {filteredItems.map((product) => (
           <ProductItem key={product.id} product={product} onViewDetails={handleViewDetails} onAddToCart={handleAddToCart} />
         ))}
       </div>

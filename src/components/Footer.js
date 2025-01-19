@@ -16,13 +16,13 @@ const Footer = () => {
               className="footer_logo mb-3"
             />
             <p className="footer_contact_color">
-              <i className="fa fa-map-marker-alt"></i> 123 E-Shop St, New York, USA
+              <i className="fa fa-map-marker-alt"></i>123 , newstreet ,selaqui
             </p>
             <p className="footer_contact_color">
-              <i className="fa fa-phone"></i> +012 345 67890
+              <i className="fa fa-phone"></i> 2511251121
             </p>
             <p className="footer_contact_color">
-              <i className="fa fa-envelope"></i> support@eshop.com
+              <i className="fa fa-envelope"></i> help@him.com
             </p>
           </div>
 
@@ -43,7 +43,7 @@ const Footer = () => {
             <div className="input-group">
               <input
                 type="email"
-                className="form-control footer_newsletter"
+                className=" d-flex mt-3 form-control footer_newsletter"
                 placeholder="Enter your email"
               />
               <button className="btn footer_subcribe">Subscribe</button>
@@ -66,7 +66,7 @@ const Footer = () => {
 
         {/* Copyright Section */}
         <div className="text-center pt-3">
-          <p className="footer_text-body">© 2025 E-Shop. All Rights Reserved.</p>
+          <p className="footer_text-body">© 2025 HDE-shop All Rights Reserved.</p>
         </div>
       </div>
     </footer>

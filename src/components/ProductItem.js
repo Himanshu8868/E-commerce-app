@@ -8,10 +8,10 @@ const ProductItem = ({ product, onViewDetails, onAddToCart }) => {
       <h3 className="product-name">{product.name}</h3>
       <p className="product-price">{product.price}</p>
       <p className="product-rating">Rating: {product.rating} ★</p>
-      <button className="btn btn-primary" onClick={() => onViewDetails(product)}>View Details</button>
-      <button className="btn btn-success" onClick={() => onAddToCart(product)}>
+      <button className="btn btn-primary" onClick={() => onViewDetails(product)}>View</button>
+      {/* <button className="btn btn-success" onClick={() => onAddToCart(product)}>
         <i className="fas fa-shopping-cart"></i> Add to Cart
-      </button>
+      </button> */}
     </div>
   );
 };

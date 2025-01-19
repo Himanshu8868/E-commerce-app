@@ -1,16 +1,18 @@
 import React, { createContext, useState } from 'react';
 
-export const CartContext = createContext();
+// Create the CartContext
+const CartContext = createContext();
 
-export const CartProvider = ({ children }) => {
+// Create the CartProvider component
+const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
-  const addToCart = (product) => {
-    setCartItems((prevItems) => [...prevItems, product]);
+  const addToCart = (item) => {
+    setCartItems((prevItems) => [...prevItems, item]);
   };
 
-  const removeFromCart = (product) => {
-    setCartItems((prevItems) => prevItems.filter(item => item.id !== product.id));
+  const removeFromCart = (itemId) => {
+    setCartItems((prevItems) => prevItems.filter(item => item.id !== itemId));
   };
 
   return (
@@ -19,3 +21,5 @@ export const CartProvider = ({ children }) => {
     </CartContext.Provider>
   );
 };
+
+export { CartProvider, CartContext };

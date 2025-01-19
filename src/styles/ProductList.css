@@ -22,9 +22,9 @@
   flex-direction: column;
   width: 100%;
   padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #ffffff;
+  border: 1px solid #ebd405;
+  border-radius: 3em;
+  background-color: #e2dcdc;
   text-align: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
@@ -41,7 +41,7 @@
   height: auto;
   max-height: 150px;
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 10px;
   margin-bottom: 10px;
 }
 
@@ -156,4 +156,30 @@
   50% {
     opacity: 1;
   }
+}
+
+@media (max-width: 576px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr); /* 3 item per column */
+  }
+}
+
+/* Styles for the view button */
+.view-btn {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.view-btn:hover {
+  background-color: #0056b3;
+}
+
+.view-btn.active {
+  background-color: #0056b3;
+  color: #e9ecef;
 }
