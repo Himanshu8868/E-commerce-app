@@ -47,7 +47,11 @@ const Header = () => {
     e.preventDefault();
     navigate(path);
   };
-
+  
+const handleLogout = () =>{
+    localStorage.removeItem('token');
+    navigate('/login')
+}
   return (
     <div>
       <nav className="navbar navbar-expand-lg">
@@ -66,13 +70,13 @@ const Header = () => {
               <li className="nav-item">
                 <a className="nav-link" href="/Blank" onClick={(e) => handleNavClick(e, '/Blank')}>Action</a>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a className="nav-link" href="/Blank" onClick={(e) => handleNavClick(e, '/Blank')}>Another action</a>
               </li>
             
               <li className="nav-item">
                 <a className="nav-link" href="/Blank" onClick={(e) => handleNavClick(e, '/Blank')}>Even more items</a>
-              </li>
+              </li> */}
               
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -105,8 +109,9 @@ const Header = () => {
             <Link to="/cart" className="btn btn-cart mx-2">
               <i className="fas fa-shopping-cart"></i> Cart <span className="badge badge-light">{cartItems.length}</span>
             </Link>
-
-            <button className="btn btn-login mx-2">LogIn</button>
+               {!localStorage.getItem('token') ? <form>
+            <Link className="btn btn-login- mx-2 mb-3" to="/login" role='button'>LogIn</Link>
+               </form> :  <button onClick={handleLogout} className='btn btn-logout-primary  mb-3 mx-2'>Logout</button> }
           </div>
         </div>
       </nav>

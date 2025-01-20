@@ -9,6 +9,11 @@ import { CartProvider } from './context/CartContext';
 import './App.css';
 import Blank from './components/Blank';
 import OrderHistory from './components/OrderHistory';
+import Signup from './components/Signup';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard'; // Protected component
+import ProtectedRoute from './components/ProtectedRoute';
+
 // import Checkout from './components/Checkout';
 
 const App = () => {
@@ -23,7 +28,16 @@ const App = () => {
           <Route path="/order" element={<OrderForm />} />
           
           <Route path="/order-history" element={<OrderHistory />} />
-          {/* <Route path="/checkout" element={<Checkout />} /> */}
+          <Route path="/login" element={<Login/>} />
+          <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+          <Route path="/signup" element={<Signup/>} />
           <Route path="/Blank" element={<Blank />} />
         </Routes>
         <Footer />
