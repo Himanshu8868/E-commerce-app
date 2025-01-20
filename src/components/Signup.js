@@ -27,7 +27,7 @@ const Signup = () => {
     setLoading(true); // Start loading
   
     try {
-      const response = await fetch("http://localhost:4000/api/auth/createuser", {
+      const response = await fetch("https://e-commerce-app-ajn4.onrender.com"/api/auth/createuser", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
