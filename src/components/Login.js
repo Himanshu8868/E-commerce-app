@@ -15,7 +15,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:4000/api/auth/login', credentials, {
+      const response = await axios.post('https://e-commerce-app-ajn4.onrender.com'/api/auth/login', credentials, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
