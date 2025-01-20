@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = "himanshu@123";
 
-const Fetchuser = (req, res, next) => {
+const FetchAdmin = (req, res, next) => {
     try {
         const token = req.header('auth-token');
         if (!token) {
@@ -13,7 +13,11 @@ const Fetchuser = (req, res, next) => {
         const data = jwt.verify(token, JWT_SECRET);
         console.log("Decoded data:", data);
 
-        req.user = data.user;
+        if (data.admin.role !== 'admin') {
+            return res.status(403).json({ error: "Access Denied! Not an admin" });
+        }
+
+        req.admin = data.admin;
 
         next();
     } catch (error) {
@@ -22,5 +26,4 @@ const Fetchuser = (req, res, next) => {
     }
 };
 
-
-module.exports = Fetchuser;
+module.exports = FetchAdmin;
