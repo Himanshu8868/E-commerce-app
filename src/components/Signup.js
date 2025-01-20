@@ -16,47 +16,42 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
-
-    // Validate passwords match
+    setError(null); // Clear any previous error
+  
     if (credentials.password !== credentials.cpassword) {
       setError("Passwords do not match");
       return;
     }
-
-    // Validate phone number format
-    if (!/^\d{10,15}$/.test(credentials.phone)) {
-      setError("Enter a valid phone number (10-15 digits)");
-      return;
-    }
-
+  
     const { name, email, password, phone } = credentials;
-    setLoading(true);
-
+    setLoading(true); // Start loading
+  
     try {
       const response = await fetch("http://localhost:4000/api/auth/createuser", {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, password, phone })
+        body: JSON.stringify({ name, email, password, phone }),
       });
-
-      const json = await response.json();
-
+  
+      // Check if response is OK (status 200-299)
       if (response.ok) {
+        const json = await response.json();
         localStorage.setItem('token', json.jwtToken);
         setCredentials({ name: "", email: "", password: "", cpassword: "", phone: "" }); // Reset form fields
         navigate("/"); // Navigate to home page
       } else {
-        setError(json.error || "Failed to create user");
+        const errorData = await response.json(); // Parse error details if the response is not OK
+        setError(errorData.error || "Failed to create user");
       }
     } catch (err) {
       setError("An error occurred: " + err.message);
     } finally {
-      setLoading(false);
+      setLoading(false); // Stop loading
     }
   };
+  
 
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -64,7 +59,7 @@ const Signup = () => {
   };
 
   return (
-    <div className='container'>
+    <div className="signup-container">
       <form className='form-signup' onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">Name</label>

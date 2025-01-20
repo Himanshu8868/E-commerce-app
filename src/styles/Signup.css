@@ -1,13 +1,7 @@
-/* General styling */
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f7f7f7;
-  margin: 0;
-  padding: 0;
-}
+
 
 /* Container for the form */
-.container {
+.signup-container {
   display: flex;
   justify-content: center;
   align-items: center;

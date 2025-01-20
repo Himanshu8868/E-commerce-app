@@ -11,7 +11,9 @@ app.use(express.json());
 
 // Enable CORS
 app.use(cors({
-    origin: 'http://localhost:3000', // Allow requests from this origin
+    origin: ['http://localhost:3000', 'https://kwth557t-3000.inc1.devtunnels.ms'], // Allow requests from these origins
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+    credentials: true // Include cookies or authentication headers
 }));
 
 // Import the routes.auth module
@@ -22,5 +24,5 @@ app.use('/api/auth', authRoutes);
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Example app listening on port http://localhost:${port}`);
+    console.log(`Example app listening at http://localhost:${port}`);
 });
