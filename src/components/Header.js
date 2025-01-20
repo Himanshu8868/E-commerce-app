@@ -8,6 +8,7 @@ const Header = () => {
   const { cartItems } = useContext(CartContext);
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+  const [showLoginOptions, setShowLoginOptions] = useState(false);
   const navigate = useNavigate();
 
   const handleSearchChange = (e) => {
@@ -47,11 +48,16 @@ const Header = () => {
     e.preventDefault();
     navigate(path);
   };
-  
-const handleLogout = () =>{
+
+  const handleLogout = () => {
     localStorage.removeItem('token');
-    navigate('/login')
-}
+    navigate('/login');
+  };
+
+  const toggleLoginOptions = () => {
+    setShowLoginOptions(!showLoginOptions);
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg">
@@ -70,23 +76,14 @@ const handleLogout = () =>{
               <li className="nav-item">
                 <a className="nav-link" href="/Blank" onClick={(e) => handleNavClick(e, '/Blank')}>Action</a>
               </li>
-              {/* <li className="nav-item">
-                <a className="nav-link" href="/Blank" onClick={(e) => handleNavClick(e, '/Blank')}>Another action</a>
-              </li>
-            
-              <li className="nav-item">
-                <a className="nav-link" href="/Blank" onClick={(e) => handleNavClick(e, '/Blank')}>Even more items</a>
-              </li> */}
-              
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                 Order
+                  Order
                 </a>
                 <ul className="dropdown-menu">
                   <li><a className="dropdown-item" href="/action" onClick={(e) => handleNavClick(e, '/action')}>Action</a></li>
                   <li><a className="dropdown-item" href="/another-action" onClick={(e) => handleNavClick(e, '/another-action')}>Another action</a></li>
                   <li className="dropdown-divider"></li>
-
                   <Link to="/order-history" className="btn btn-order-history mx-2">
                     <i className="fas fa-history"></i> Orders
                   </Link>
@@ -109,9 +106,19 @@ const handleLogout = () =>{
             <Link to="/cart" className="btn btn-cart mx-2">
               <i className="fas fa-shopping-cart"></i> Cart <span className="badge badge-light">{cartItems.length}</span>
             </Link>
-               {!localStorage.getItem('token') ? <form>
-            <Link className="btn btn-login- mx-2 mb-3" to="/login" role='button'>LogIn</Link>
-               </form> :  <button onClick={handleLogout} className='btn btn-logout-primary  mb-3 mx-2'>Logout</button> }
+            {!localStorage.getItem('token') ? (
+              <>
+                <button className="btn btn-login mx-2 mb-3" onClick={toggleLoginOptions}>Login</button>
+                {showLoginOptions && (
+                  <div className="login-options">
+                    <button className="btn btn-primary mb-2" onClick={() => navigate('/admin-login')}>Admin Login</button>
+                    <button className="btn btn-secondary" onClick={() => navigate('/login')}>User Login</button>
+                  </div>
+                )}
+              </>
+            ) : (
+              <button onClick={handleLogout} className="btn btn-logout-primary mb-3 mx-2">Logout</button>
+            )}
           </div>
         </div>
       </nav>
