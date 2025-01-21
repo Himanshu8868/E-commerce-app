@@ -25,7 +25,7 @@ const AdminLogin = () => {
       if (response.data.jwtToken) {
         // Save the token to localStorage
         localStorage.setItem('token', response.data.jwtToken);
-        navigate('/admin/dashboard'); // Redirect to a protected route
+        navigate('/Admindeshboard'); // Redirect to a protected route
       } else {
         setError('Invalid credentials');
       }
